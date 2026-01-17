@@ -13,7 +13,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk
-          echo "y" | sdkmanager --install "platforms;android-33" "build-tools;33.0.0"
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-33" "build-tools;33.0.0"
       - name: Install Build Dependencies
         run: |
           pip install --upgrade pip setuptools
@@ -21,6 +21,8 @@ jobs:
           pip install cython requests
       - name: Build APK
         run: |
+          export ANDROIDSDK=$ANDROID_HOME
+          export ANDROIDNDK=$ANDROID_HOME/ndk-bundle
           p4a apk --private . \
             --package=com.gojo.filewatcher \
             --name="FileWatcher" \

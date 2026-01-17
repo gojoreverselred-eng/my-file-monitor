@@ -11,8 +11,7 @@ jobs:
           python_version: '3.11'
       - name: Install Build Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y setuptools
+          pip install --upgrade pip setuptools
           pip install git+https://github.com/kivy/python-for-android.git
           pip install cython requests
       - name: Build APK
